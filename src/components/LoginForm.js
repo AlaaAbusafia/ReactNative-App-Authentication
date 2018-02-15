@@ -4,7 +4,7 @@ import Firebase from 'firebase';
 import { Button , Card, CardSection, Input, Spinner } from './common';
 
 class LoginForm extends Component {
-  //to deal with user reaction
+
   state = { email: '', password: '', error: '', loading: false };
 
   onButtonPress(){
@@ -13,10 +13,8 @@ class LoginForm extends Component {
     this.setState({ error: '', loading: true});
 
     Firebase.auth().signInWithEmailAndPassword(email, password)
-      //to clear the spinner
       .then(this.onLoginSuccess.bind(this))
       .catch( () => {
-        //if user fail to sign in , this will ask him to create account
         Firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(this.onLoginSuccess.bind(this))
           .catch(this.onLoginFail.bind(this));
@@ -39,6 +37,7 @@ class LoginForm extends Component {
       error: ''
     });
   }
+
   renderButton(){
       if(this.state.loading){
         return <Spinner size="small" />;
