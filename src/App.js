@@ -26,6 +26,7 @@ class App extends Component {
         }
     });
   }
+
   renderContent(){
     switch(this.state.loggedIn){
       case true:
